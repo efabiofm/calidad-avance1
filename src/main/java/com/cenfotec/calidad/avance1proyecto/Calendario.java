@@ -19,4 +19,36 @@ public class Calendario {
         }
         return false;
     }
+    
+    public String diaSiguiente(int anio, int mes, int dia){
+        boolean esBisiesto = esBisiesto(anio);
+        int diasDelMes = diasPorMes[mes - 1];
+        int sigDia = dia, sigMes = mes, sigAnio = anio; 
+        String sigFecha;
+        
+        if (mes == 2 && esBisiesto) {
+            diasDelMes ++;
+        }
+        
+        if (dia < diasDelMes) {
+            sigDia = dia + 1;
+            sigMes = mes;
+            sigAnio = anio;
+        } else if (dia == diasDelMes) {
+            sigDia = 1;
+            
+            if (mes == 12) {
+                sigMes = 1;
+                sigAnio = anio + 1;
+            } else {
+                sigMes = mes + 1;
+                sigAnio = anio;
+            }
+            
+        }
+        
+        return sigFecha = sigAnio + " " + sigMes + " " + sigDia;
+        
+    }
+    
 }
