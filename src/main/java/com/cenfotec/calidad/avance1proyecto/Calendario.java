@@ -51,4 +51,50 @@ public class Calendario {
         
     }
     
+    public int diaSemana(int anio, int mes, int dia) {
+        int[] valoresMeses = {1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
+        boolean esBisiesto = esBisiesto(anio);
+        int valorSiglo = 0;
+        int diaSemana;
+
+        int resulKeyValue = ((int) (anio % 100) / 4) + (dia + valoresMeses[mes - 1]);
+
+        if (mes == 1 && esBisiesto || mes == 2 && esBisiesto) {
+            resulKeyValue -= 1;
+        }
+
+        int siglo = Integer.parseInt(Integer.toString(anio).substring(0, 2) + "00");
+        int decadaAnio = Integer.parseInt(Integer.toString(anio).substring(2, 4));
+
+        if (siglo < 1700 || siglo > 2099) {
+            while (siglo < 1700 || siglo > 2099) {
+                if (siglo < 1700) {
+                    siglo += 400;
+                } else if (siglo > 2099) {
+                    siglo -= 400;
+                }
+            }
+        }
+
+        switch (siglo) {
+
+            case 1700:
+                valorSiglo = 4;
+            case 1800:
+                valorSiglo = 2;
+            case 1900:
+                valorSiglo = 0;
+            case 2000:
+                valorSiglo = 6;
+        }
+
+        resulKeyValue += valorSiglo + decadaAnio;
+        resulKeyValue = (int) resulKeyValue % 7;
+        
+        diaSemana = resulKeyValue == 0 ? 6 : resulKeyValue - 1;
+        
+        return diaSemana;
+
+    }
+    
 }

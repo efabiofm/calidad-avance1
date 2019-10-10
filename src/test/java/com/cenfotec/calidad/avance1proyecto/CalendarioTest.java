@@ -26,4 +26,17 @@ public class CalendarioTest {
         assertEquals(false, cal.esFechaValida(2019, 13, 1));
     }
     
+    public void testDiaSiguiente() {
+        Calendario cal = new Calendario();
+        assertEquals("2020 2 29", cal.diaSiguiente(2020, 2, 28));
+        assertEquals("2020 3 1", cal.diaSiguiente(2020, 2, 29));
+        assertEquals("2019 1 1", cal.diaSiguiente(2018, 12, 31));
+    }
+    
+    public void testDiaSemana() {
+        Calendario cal = new Calendario();
+        assertEquals(0, cal.diaSemana(2019, 11, 24));
+        assertEquals(6, cal.diaSemana(2020, 2, 29));
+        assertEquals(5, cal.diaSemana(2019, 3, 1));
+    }
 }
