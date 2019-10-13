@@ -31,12 +31,12 @@ public class CalendarioTest {
     
     public void testDiaSiguiente() {
         Calendario cal = new Calendario();
-        assertEquals("2020 1 1", cal.diaSiguiente(2019, 12, 31));
-        assertEquals("2019 3 1", cal.diaSiguiente(2019, 2, 28));
-        assertEquals("2020 2 29", cal.diaSiguiente(2020, 2, 28));
-        assertEquals("2020 3 1", cal.diaSiguiente(2020, 2, 29));
-        assertEquals("2020 2 1", cal.diaSiguiente(2020, 1, 31));
-        assertEquals("2020 5 1", cal.diaSiguiente(2020, 4, 30));
+        assertEquals("[2020, 1, 1]", cal.diaSiguiente(2019, 12, 31));
+        assertEquals("[2019, 3, 1]", cal.diaSiguiente(2019, 2, 28));
+        assertEquals("[2020, 2, 29]", cal.diaSiguiente(2020, 2, 28));
+        assertEquals("[2020, 3, 1]", cal.diaSiguiente(2020, 2, 29));
+        assertEquals("[2020, 2, 1]", cal.diaSiguiente(2020, 1, 31));
+        assertEquals("[2020, 5, 1]", cal.diaSiguiente(2020, 4, 30));
     }
     
     public void testDiaSemana() {

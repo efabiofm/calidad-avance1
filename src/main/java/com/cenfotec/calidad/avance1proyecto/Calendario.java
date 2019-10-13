@@ -52,8 +52,9 @@ public class Calendario {
             }
 
         }
-
-        return sigFecha = sigAnio + " " + sigMes + " " + sigDia;
+        
+        //retorno en formato tupla
+        return sigFecha = "[" + sigAnio + ", " + sigMes + ", " + sigDia + "]";
 
     }
 
