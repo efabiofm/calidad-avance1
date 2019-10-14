@@ -26,11 +26,10 @@ public class Calendario {
         return false;
     }
 
-    public String diaSiguiente(int anio, int mes, int dia) {
+    public int[] diaSiguiente(int anio, int mes, int dia) {
         boolean esBisiesto = esBisiesto(anio);
         int diasDelMes = diasPorMes[mes - 1];
         int sigDia = dia, sigMes = mes, sigAnio = anio;
-        String sigFecha;
 
         if (mes == 2 && esBisiesto) {
             diasDelMes++;
@@ -54,8 +53,7 @@ public class Calendario {
         }
         
         //retorno en formato tupla
-        return sigFecha = "[" + sigAnio + ", " + sigMes + ", " + sigDia + "]";
-
+        return new int[] {sigAnio, sigMes, sigDia};
     }
 
     public int diaSemana(int anio, int mes, int dia) {
