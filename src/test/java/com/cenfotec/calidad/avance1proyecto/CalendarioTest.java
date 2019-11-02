@@ -26,7 +26,12 @@ public class CalendarioTest {
         assertEquals(true, cal.esFechaValida(1583, 1, 1));
         assertEquals(false, cal.esFechaValida(2019, 2, 29));
         assertEquals(true, cal.esFechaValida(2020, 2, 29));
-
+        // Tests adicionales para cubrir los branches no visitados
+        assertEquals(false, cal.esFechaValida(2020, 0, 1));
+        assertEquals(false, cal.esFechaValida(2020, 13, 1));
+        assertEquals(false, cal.esFechaValida(2020, 1, 0));
+        assertEquals(false, cal.esFechaValida(2020, 1, 32));
+        assertEquals(true, cal.esFechaValida(2020, 1, 31));
     }
     
     public void testDiaSiguiente() {
@@ -37,6 +42,8 @@ public class CalendarioTest {
         assertArrayEquals(new int[]{2020, 3, 1}, cal.diaSiguiente(2020, 2, 29));
         assertArrayEquals(new int[]{2020, 2, 1}, cal.diaSiguiente(2020, 1, 31));
         assertArrayEquals(new int[]{2020, 5, 1}, cal.diaSiguiente(2020, 4, 30));
+        // Tests adicionales para cubrir los branches no visitados
+        assertArrayEquals(new int[]{2020, 1, 3}, cal.diaSiguiente(2020, 1, 2));
     }
     
     public void testDiaSemana() {
@@ -48,5 +55,14 @@ public class CalendarioTest {
         assertEquals(4, cal.diaSemana(2020, 2, 27));
         assertEquals(5, cal.diaSemana(2020, 2, 28));
         assertEquals(6, cal.diaSemana(2020, 2, 29));
+        // Tests adicionales para cubrir los branches no visitados
+        assertEquals(3, cal.diaSemana(2020, 1, 1));
+        assertEquals(4, cal.diaSemana(1699, 1, 1));
+        assertEquals(5, cal.diaSemana(2100, 1, 1));
+        assertEquals(5, cal.diaSemana(1700, 1, 1));
+        assertEquals(3, cal.diaSemana(1800, 1, 1));
+        assertEquals(1, cal.diaSemana(1900, 1, 1));
+        assertEquals(5, cal.diaSemana(2019, 2, 1));
+        assertEquals(3, cal.diaSemana(3000, 1, 1));
     }
 }
