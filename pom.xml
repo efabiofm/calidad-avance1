@@ -50,6 +50,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*com/cenfotec/calidad/avance1proyecto/Main.class</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

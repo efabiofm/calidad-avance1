@@ -39,7 +39,7 @@ public class Calendario {
             sigDia = dia + 1;
             sigMes = mes;
             sigAnio = anio;
-        } else if (dia == diasDelMes) {
+        } else {
             sigDia = 1;
 
             if (mes == 12) {
@@ -79,7 +79,7 @@ public class Calendario {
             while (siglo < 1700 || siglo > 2099) {
                 if (siglo < 1700) {
                     siglo += 400;
-                } else if (siglo > 2099) {
+                } else {
                     siglo -= 400;
                 }
             }
@@ -88,12 +88,18 @@ public class Calendario {
         switch (siglo) {
             case 1700:
                 valorSiglo = 4;
+                break;
             case 1800:
                 valorSiglo = 2;
+                break;
             case 1900:
                 valorSiglo = 0;
+                break;
             case 2000:
                 valorSiglo = 6;
+                break;
+            default:
+                break;
         }
 
         resulKeyValue += valorSiglo + decadaAnio;
