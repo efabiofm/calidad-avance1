@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calendario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avance1proyecto</a> &gt; <a href="index.source.html" class="el_package">com.cenfotec.calidad.avance1proyecto</a> &gt; <span class="el_source">Calendario.java</span></div><h1>Calendario.java</h1><pre class="source lang-java linenums">package com.cenfotec.calidad.avance1proyecto;
+
+<span class="fc" id="L3">public class Calendario {</span>
+
+<span class="fc" id="L5">    private final int ANIO_MINIMO = 1582;</span>
+<span class="fc" id="L6">    private int[] diasPorMes = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</span>
+
+    public boolean esBisiesto(int anio) {
+        //Un año bisiesto en el calendario gregoriano debe:
+        //ser divisible entre 4 sin decimales
+        //Si el año es divisible entre 100 también debe ser divisble entre 400 sin decimales
+<span class="fc bfc" id="L12" title="All 6 branches covered.">        return anio % 4 == 0 &amp;&amp; (anio % 100 != 0 || anio % 400 == 0);</span>
+    }
+
+    public boolean esFechaValida(int anio, int mes, int dia) {
+        //fechas válidas en el calendario gregoriano deben cumplir con el número de meses, 
+        // días y años bisiestos correctos
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        if (anio &gt;= ANIO_MINIMO) {</span>
+<span class="pc bpc" id="L19" title="2 of 4 branches missed.">            if (mes &gt; 0 &amp;&amp; mes &lt;= 12) {</span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">                int numeroDeDias = mes == 2 &amp;&amp; esBisiesto(anio) ? diasPorMes[mes - 1] + 1 : diasPorMes[mes - 1];</span>
+<span class="pc bpc" id="L21" title="1 of 4 branches missed.">                if (dia &gt; 0 &amp;&amp; dia &lt;= numeroDeDias) {</span>
+<span class="fc" id="L22">                    return true;</span>
+                }
+            }
+        }
+<span class="fc" id="L26">        return false;</span>
+    }
+
+    public int[] diaSiguiente(int anio, int mes, int dia) {
+<span class="fc" id="L30">        boolean esBisiesto = esBisiesto(anio);</span>
+<span class="fc" id="L31">        int diasDelMes = diasPorMes[mes - 1];</span>
+<span class="fc" id="L32">        int sigDia = dia, sigMes = mes, sigAnio = anio;</span>
+
+<span class="fc bfc" id="L34" title="All 4 branches covered.">        if (mes == 2 &amp;&amp; esBisiesto) {</span>
+<span class="fc" id="L35">            diasDelMes++;</span>
+        }
+
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (dia &lt; diasDelMes) {</span>
+<span class="fc" id="L39">            sigDia = dia + 1;</span>
+<span class="fc" id="L40">            sigMes = mes;</span>
+<span class="fc" id="L41">            sigAnio = anio;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        } else if (dia == diasDelMes) {</span>
+<span class="fc" id="L43">            sigDia = 1;</span>
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if (mes == 12) {</span>
+<span class="fc" id="L46">                sigMes = 1;</span>
+<span class="fc" id="L47">                sigAnio = anio + 1;</span>
+            } else {
+<span class="fc" id="L49">                sigMes = mes + 1;</span>
+<span class="fc" id="L50">                sigAnio = anio;</span>
+            }
+
+        }
+        
+        //retorno en formato tupla
+<span class="fc" id="L56">        return new int[] {sigAnio, sigMes, sigDia};</span>
+    }
+
+    public int diaSemana(int anio, int mes, int dia) {
+        //el cálculo del dia de la semana se hace utilizando el método Key Value
+        //los valores de meses y siglos están definidos por Key value
+<span class="fc" id="L62">        int[] valoresMeses = {1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};</span>
+<span class="fc" id="L63">        boolean esBisiesto = esBisiesto(anio);</span>
+<span class="fc" id="L64">        int valorSiglo = 0;</span>
+        int diaSemana;
+
+<span class="fc" id="L67">        int resulKeyValue = ((int) (anio % 100) / 4) + (dia + valoresMeses[mes - 1]);</span>
+
+<span class="pc bpc" id="L69" title="5 of 8 branches missed.">        if (mes == 1 &amp;&amp; esBisiesto || mes == 2 &amp;&amp; esBisiesto) {</span>
+<span class="fc" id="L70">            resulKeyValue -= 1;</span>
+        }
+
+<span class="fc" id="L73">        int siglo = Integer.parseInt(Integer.toString(anio).substring(0, 2) + &quot;00&quot;);</span>
+<span class="fc" id="L74">        int decadaAnio = Integer.parseInt(Integer.toString(anio).substring(2, 4));</span>
+
+        //el calendario gregoriano se repite cada 400 años por eso es necesario
+        //sumar o restar hasta encontrar un valor en este rango
+<span class="pc bpc" id="L78" title="2 of 4 branches missed.">        if (siglo &lt; 1700 || siglo &gt; 2099) {</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">            while (siglo &lt; 1700 || siglo &gt; 2099) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                if (siglo &lt; 1700) {</span>
+<span class="nc" id="L81">                    siglo += 400;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                } else if (siglo &gt; 2099) {</span>
+<span class="nc" id="L83">                    siglo -= 400;</span>
+                }
+            }
+        }
+
+<span class="pc bpc" id="L88" title="4 of 5 branches missed.">        switch (siglo) {</span>
+            case 1700:
+<span class="nc" id="L90">                valorSiglo = 4;</span>
+            case 1800:
+<span class="nc" id="L92">                valorSiglo = 2;</span>
+            case 1900:
+<span class="nc" id="L94">                valorSiglo = 0;</span>
+            case 2000:
+<span class="fc" id="L96">                valorSiglo = 6;</span>
+        }
+
+<span class="fc" id="L99">        resulKeyValue += valorSiglo + decadaAnio;</span>
+<span class="fc" id="L100">        resulKeyValue = (int) resulKeyValue % 7;</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        diaSemana = resulKeyValue == 0 ? 6 : resulKeyValue - 1;</span>
+
+<span class="fc" id="L103">        return diaSemana;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
