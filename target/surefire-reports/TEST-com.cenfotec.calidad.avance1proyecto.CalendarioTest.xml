@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest" time="0.045" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest" time="0.071" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.4+11-post-Ubuntu-1ubuntu218.04.3"/>
@@ -24,8 +24,8 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="maven.ext.class.path" value="/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar"/>
-    <property name="classworlds.conf" value="/snap/netbeans/10/netbeans/java/maven/bin/m2.conf"/>
+    <property name="maven.ext.class.path" value="/snap/netbeans/18/netbeans/java/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="/snap/netbeans/18/netbeans/java/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="jdk.debug" value="release"/>
@@ -40,10 +40,10 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="11"/>
     <property name="user.name" value="phabius"/>
-    <property name="java.class.path" value="/snap/netbeans/10/netbeans/java/maven/boot/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.class.path" value="/snap/netbeans/18/netbeans/java/maven/boot/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -DskipTests=false -Dmaven.ext.class.path=/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar clean verify"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -DskipTests=false -Dmaven.ext.class.path=/snap/netbeans/18/netbeans/java/maven-nblib/netbeans-eventspy.jar clean verify"/>
     <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -52,7 +52,7 @@
     <property name="java.version" value="11.0.4"/>
     <property name="securerandom.source" value="file:/dev/./urandom"/>
     <property name="java.vendor" value="Ubuntu"/>
-    <property name="maven.home" value="/snap/netbeans/10/netbeans/java/maven"/>
+    <property name="maven.home" value="/snap/netbeans/18/netbeans/java/maven"/>
     <property name="file.separator" value="/"/>
     <property name="java.version.date" value="2019-07-16"/>
     <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
@@ -61,8 +61,10 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSemana" time="0.035"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSiguiente" time="0.001"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsBisiesto" time="0.008"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsFechaValida" time="0.001"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testFechaPasada" time="0.038"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsFechaValida" time="0.011"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsBisiesto" time="0.001"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testFechaFutura" time="0.002"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSemana" time="0.019"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSiguiente" time="0"/>
 </testsuite>
