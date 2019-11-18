@@ -109,5 +109,123 @@ public class Calendario {
         return diaSemana;
 
     }
+    
+    public int diasEntreFechas(int[] fecha1, int[] fecha2) {
+        int diasEntreFechas = 0;
+        int fechaMenorAnio;
+        int fechaMenorMes;
+        int fechaMenorDia;
+        int fechaMayorAnio;
+        int fechaMayorMes;
+        int fechaMayorDia;
+        int diasMes;
+        String fechaMayor;
+        String fechaMenor;
+        boolean esAnioBisiesto;
+        
+        if ((fecha1[0] == fecha2[0]) && (fecha1[1] == fecha2[1]) && (fecha1[2] == fecha2[2])) {
+            
+            diasEntreFechas  = 0;
+        
+        } else {
+            
+            if (fecha1[0] > fecha2[0]) {
+                
+                fechaMayorAnio = fecha1[0];
+                fechaMayorMes = fecha1[1];
+                fechaMayorDia = fecha1[2];         
+                fechaMenorAnio = fecha2[0];
+                fechaMenorMes = fecha2[1];
+                fechaMenorDia = fecha2[2];
+                
+            } else if (fecha1[0] < fecha2[0]) {
+                
+                fechaMayorAnio = fecha2[0];
+                fechaMayorMes = fecha2[1];
+                fechaMayorDia = fecha2[2];                
+                fechaMenorAnio = fecha1[0];
+                fechaMenorMes = fecha1[1];
+                fechaMenorDia = fecha1[2];
+                
+            } else {
+                
+                if (fecha1[1] > fecha2[1]) {
+                    
+                    fechaMayorAnio = fecha1[0];
+                    fechaMayorMes = fecha1[1];
+                    fechaMayorDia = fecha1[2];         
+                    fechaMenorAnio = fecha2[0];
+                    fechaMenorMes = fecha2[1];
+                    fechaMenorDia = fecha2[2];
+                    
+                }else if (fecha1[1] < fecha2[1]) {
+                    
+                    fechaMayorAnio = fecha2[0];
+                    fechaMayorMes = fecha2[1];
+                    fechaMayorDia = fecha2[2];                
+                    fechaMenorAnio = fecha1[0];
+                    fechaMenorMes = fecha1[1];
+                    fechaMenorDia = fecha1[2];
+                    
+                } else {
+                    
+                    if (fecha1[2] > fecha2[2]) {
+                        
+                        fechaMayorAnio = fecha1[0];
+                        fechaMayorMes = fecha1[1];
+                        fechaMayorDia = fecha1[2];         
+                        fechaMenorAnio = fecha2[0];
+                        fechaMenorMes = fecha2[1];
+                        fechaMenorDia = fecha2[2];
+                        
+                    }else {
+                        
+                        fechaMayorAnio = fecha2[0];
+                        fechaMayorMes = fecha2[1];
+                        fechaMayorDia = fecha2[2];                
+                        fechaMenorAnio = fecha1[0];
+                        fechaMenorMes = fecha1[1];
+                        fechaMenorDia = fecha1[2];
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            fechaMayor = Integer.toString(fechaMayorAnio) + Integer.toString(fechaMayorMes) + Integer.toString(fechaMayorDia);
+            fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);
+            esAnioBisiesto = esBisiesto(fechaMenorAnio);
+                        
+            while (!fechaMenor.equals(fechaMayor)) {
+
+                fechaMenorDia ++;
+                
+                if (esAnioBisiesto && fechaMenorMes == 2) {
+                    diasMes = diasPorMes[fechaMenorMes - 1] + 1;
+                } else {
+                    diasMes = diasPorMes[fechaMenorMes - 1];
+                }                
+                
+                if (fechaMenorDia > diasMes) {
+                    fechaMenorDia = 1;
+                    fechaMenorMes ++;
+                }
+                
+                if (fechaMenorMes > diasPorMes.length) {
+                    fechaMenorMes = 1;
+                    fechaMenorAnio ++;
+                    esAnioBisiesto = esBisiesto(fechaMenorAnio);
+                }
+                
+                diasEntreFechas ++;
+                fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);
+                
+            }
+                        
+        }
+        
+        return diasEntreFechas;
+    }
 
 }

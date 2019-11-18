@@ -65,4 +65,26 @@ public class CalendarioTest {
         assertEquals(5, cal.diaSemana(2019, 2, 1));
         assertEquals(3, cal.diaSemana(3000, 1, 1));
     }
+    
+    public void testDiasEntreFechas() {
+        Calendario cal = new Calendario();
+        int[] fecha1 = {2019, 2, 28};
+        int[] fecha2 = {2019, 2, 2};
+        int[] fecha3 = {2019, 3, 1};
+        int[] fecha4 = {2020, 3, 1};
+        int[] fecha5 = {2020, 2, 28};
+        int[] fecha6 = {2095, 3, 1};
+        int[] fecha7 = {2020, 1, 2};
+        int[] fecha8 = {2021, 2, 3};
+        assertEquals(0, cal.diasEntreFechas(fecha1, fecha1));
+        assertEquals(1, cal.diasEntreFechas(fecha1, fecha3));
+        assertEquals(2, cal.diasEntreFechas(fecha5, fecha4));
+        assertEquals(2, cal.diasEntreFechas(fecha4, fecha5));
+        assertEquals(27395, cal.diasEntreFechas(fecha5, fecha6));
+        assertEquals(27395, cal.diasEntreFechas(fecha6, fecha5));
+        assertEquals(398, cal.diasEntreFechas(fecha7, fecha8));
+        assertEquals(398, cal.diasEntreFechas(fecha8, fecha7));
+        assertEquals(26, cal.diasEntreFechas(fecha1, fecha2));
+        assertEquals(26, cal.diasEntreFechas(fecha2, fecha1));
+    }
 }
