@@ -110,8 +110,63 @@
 
     }
 
+    public int[] fechaFutura(int[] fechaInicio, int diasFuturo) {
+<span class="fc" id="L114">        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        boolean esDiasFuturoValido = diasFuturo &gt; 0;</span>
+<span class="fc bfc" id="L116" title="All 4 branches covered.">        if (esFechaValida &amp;&amp; esDiasFuturoValido) {</span>
+<span class="fc" id="L117">            int anioActual = fechaInicio[0];</span>
+<span class="fc" id="L118">            int mesActual = fechaInicio[1];</span>
+<span class="fc" id="L119">            int diaActual = fechaInicio[2];</span>
+<span class="fc" id="L120">            int contador = diasFuturo;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            while(contador &gt; 0) {</span>
+<span class="fc" id="L122">                diaActual += 1;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                if (diaActual &gt; DIAS_POR_MES[mesActual - 1]) {</span>
+<span class="fc bfc" id="L124" title="All 4 branches covered.">                    if (mesActual != 2 || !esBisiesto(anioActual)) {</span>
+<span class="fc" id="L125">                        diaActual = 1;</span>
+<span class="fc" id="L126">                        mesActual += 1;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">                        if (mesActual &gt; DIAS_POR_MES.length) {</span>
+<span class="fc" id="L128">                            mesActual = 1;</span>
+<span class="fc" id="L129">                            anioActual += 1;</span>
+                        }
+                    }
+                }
+<span class="fc" id="L133">                contador--;</span>
+            }
+<span class="fc" id="L135">            return new int[] { anioActual, mesActual, diaActual };</span>
+        }
+<span class="fc" id="L137">        throw new IllegalArgumentException();</span>
+    }
+
+    public int[] fechaPasada(int[] fechaInicio, int diasPasado) {
+<span class="fc" id="L141">        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        boolean esDiasFuturoValido = diasPasado &gt; 0;</span>
+<span class="fc bfc" id="L143" title="All 4 branches covered.">        if (esFechaValida &amp;&amp; esDiasFuturoValido) {</span>
+<span class="fc" id="L144">            int anioActual = fechaInicio[0];</span>
+<span class="fc" id="L145">            int mesActual = fechaInicio[1];</span>
+<span class="fc" id="L146">            int diaActual = fechaInicio[2];</span>
+<span class="fc" id="L147">            int contador = diasPasado;</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            while(contador &gt; 0) {</span>
+<span class="fc" id="L149">                diaActual -= 1;</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                if (diaActual == 0) {</span>
+<span class="fc" id="L151">                    mesActual -= 1;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                    if (mesActual == 0) {</span>
+<span class="fc" id="L153">                        mesActual = DIAS_POR_MES.length;</span>
+<span class="fc" id="L154">                        anioActual -= 1;</span>
+                    }
+<span class="fc" id="L156">                    diaActual = DIAS_POR_MES[mesActual - 1];</span>
+<span class="fc bfc" id="L157" title="All 4 branches covered.">                    if (mesActual == 2 &amp;&amp; esBisiesto(anioActual)) {</span>
+<span class="fc" id="L158">                        diaActual += 1;</span>
+                    }
+                }
+<span class="fc" id="L161">                contador--;</span>
+            }
+<span class="fc" id="L163">            return new int[] { anioActual, mesActual, diaActual };</span>
+        }
+<span class="fc" id="L165">        throw new IllegalArgumentException();</span>
+    }
+
     public int diasEntreFechas(int[] fecha1, int[] fecha2) {
-<span class="fc" id="L114">        int diasEntreFechas = 0;</span>
+<span class="fc" id="L169">        int diasEntreFechas = 0;</span>
         int fechaMenorAnio;
         int fechaMenorMes;
         int fechaMenorDia;
@@ -123,69 +178,69 @@
         String fechaMenor;
         boolean esAnioBisiesto;
 
-<span class="fc bfc" id="L126" title="All 6 branches covered.">        if ((fecha1[0] == fecha2[0]) &amp;&amp; (fecha1[1] == fecha2[1]) &amp;&amp; (fecha1[2] == fecha2[2])) {</span>
+<span class="fc bfc" id="L181" title="All 6 branches covered.">        if ((fecha1[0] == fecha2[0]) &amp;&amp; (fecha1[1] == fecha2[1]) &amp;&amp; (fecha1[2] == fecha2[2])) {</span>
 
-<span class="fc" id="L128">            diasEntreFechas  = 0;</span>
+<span class="fc" id="L183">            diasEntreFechas  = 0;</span>
 
         } else {
 
-<span class="fc bfc" id="L132" title="All 2 branches covered.">            if (fecha1[0] &gt; fecha2[0]) {</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">            if (fecha1[0] &gt; fecha2[0]) {</span>
 
-<span class="fc" id="L134">                fechaMayorAnio = fecha1[0];</span>
-<span class="fc" id="L135">                fechaMayorMes = fecha1[1];</span>
-<span class="fc" id="L136">                fechaMayorDia = fecha1[2];         </span>
-<span class="fc" id="L137">                fechaMenorAnio = fecha2[0];</span>
-<span class="fc" id="L138">                fechaMenorMes = fecha2[1];</span>
-<span class="fc" id="L139">                fechaMenorDia = fecha2[2];</span>
+<span class="fc" id="L189">                fechaMayorAnio = fecha1[0];</span>
+<span class="fc" id="L190">                fechaMayorMes = fecha1[1];</span>
+<span class="fc" id="L191">                fechaMayorDia = fecha1[2];</span>
+<span class="fc" id="L192">                fechaMenorAnio = fecha2[0];</span>
+<span class="fc" id="L193">                fechaMenorMes = fecha2[1];</span>
+<span class="fc" id="L194">                fechaMenorDia = fecha2[2];</span>
 
-<span class="fc bfc" id="L141" title="All 2 branches covered.">            } else if (fecha1[0] &lt; fecha2[0]) {</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">            } else if (fecha1[0] &lt; fecha2[0]) {</span>
 
-<span class="fc" id="L143">                fechaMayorAnio = fecha2[0];</span>
-<span class="fc" id="L144">                fechaMayorMes = fecha2[1];</span>
-<span class="fc" id="L145">                fechaMayorDia = fecha2[2];                </span>
-<span class="fc" id="L146">                fechaMenorAnio = fecha1[0];</span>
-<span class="fc" id="L147">                fechaMenorMes = fecha1[1];</span>
-<span class="fc" id="L148">                fechaMenorDia = fecha1[2];</span>
+<span class="fc" id="L198">                fechaMayorAnio = fecha2[0];</span>
+<span class="fc" id="L199">                fechaMayorMes = fecha2[1];</span>
+<span class="fc" id="L200">                fechaMayorDia = fecha2[2];</span>
+<span class="fc" id="L201">                fechaMenorAnio = fecha1[0];</span>
+<span class="fc" id="L202">                fechaMenorMes = fecha1[1];</span>
+<span class="fc" id="L203">                fechaMenorDia = fecha1[2];</span>
 
             } else {
 
-<span class="fc bfc" id="L152" title="All 2 branches covered.">                if (fecha1[1] &gt; fecha2[1]) {</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">                if (fecha1[1] &gt; fecha2[1]) {</span>
 
-<span class="fc" id="L154">                    fechaMayorAnio = fecha1[0];</span>
-<span class="fc" id="L155">                    fechaMayorMes = fecha1[1];</span>
-<span class="fc" id="L156">                    fechaMayorDia = fecha1[2];         </span>
-<span class="fc" id="L157">                    fechaMenorAnio = fecha2[0];</span>
-<span class="fc" id="L158">                    fechaMenorMes = fecha2[1];</span>
-<span class="fc" id="L159">                    fechaMenorDia = fecha2[2];</span>
+<span class="fc" id="L209">                    fechaMayorAnio = fecha1[0];</span>
+<span class="fc" id="L210">                    fechaMayorMes = fecha1[1];</span>
+<span class="fc" id="L211">                    fechaMayorDia = fecha1[2];</span>
+<span class="fc" id="L212">                    fechaMenorAnio = fecha2[0];</span>
+<span class="fc" id="L213">                    fechaMenorMes = fecha2[1];</span>
+<span class="fc" id="L214">                    fechaMenorDia = fecha2[2];</span>
 
-<span class="fc bfc" id="L161" title="All 2 branches covered.">                }else if (fecha1[1] &lt; fecha2[1]) {</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">                }else if (fecha1[1] &lt; fecha2[1]) {</span>
 
-<span class="fc" id="L163">                    fechaMayorAnio = fecha2[0];</span>
-<span class="fc" id="L164">                    fechaMayorMes = fecha2[1];</span>
-<span class="fc" id="L165">                    fechaMayorDia = fecha2[2];                </span>
-<span class="fc" id="L166">                    fechaMenorAnio = fecha1[0];</span>
-<span class="fc" id="L167">                    fechaMenorMes = fecha1[1];</span>
-<span class="fc" id="L168">                    fechaMenorDia = fecha1[2];</span>
+<span class="fc" id="L218">                    fechaMayorAnio = fecha2[0];</span>
+<span class="fc" id="L219">                    fechaMayorMes = fecha2[1];</span>
+<span class="fc" id="L220">                    fechaMayorDia = fecha2[2];</span>
+<span class="fc" id="L221">                    fechaMenorAnio = fecha1[0];</span>
+<span class="fc" id="L222">                    fechaMenorMes = fecha1[1];</span>
+<span class="fc" id="L223">                    fechaMenorDia = fecha1[2];</span>
 
                 } else {
 
-<span class="fc bfc" id="L172" title="All 2 branches covered.">                    if (fecha1[2] &gt; fecha2[2]) {</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                    if (fecha1[2] &gt; fecha2[2]) {</span>
 
-<span class="fc" id="L174">                        fechaMayorAnio = fecha1[0];</span>
-<span class="fc" id="L175">                        fechaMayorMes = fecha1[1];</span>
-<span class="fc" id="L176">                        fechaMayorDia = fecha1[2];         </span>
-<span class="fc" id="L177">                        fechaMenorAnio = fecha2[0];</span>
-<span class="fc" id="L178">                        fechaMenorMes = fecha2[1];</span>
-<span class="fc" id="L179">                        fechaMenorDia = fecha2[2];</span>
+<span class="fc" id="L229">                        fechaMayorAnio = fecha1[0];</span>
+<span class="fc" id="L230">                        fechaMayorMes = fecha1[1];</span>
+<span class="fc" id="L231">                        fechaMayorDia = fecha1[2];</span>
+<span class="fc" id="L232">                        fechaMenorAnio = fecha2[0];</span>
+<span class="fc" id="L233">                        fechaMenorMes = fecha2[1];</span>
+<span class="fc" id="L234">                        fechaMenorDia = fecha2[2];</span>
 
                     }else {
 
-<span class="fc" id="L183">                        fechaMayorAnio = fecha2[0];</span>
-<span class="fc" id="L184">                        fechaMayorMes = fecha2[1];</span>
-<span class="fc" id="L185">                        fechaMayorDia = fecha2[2];                </span>
-<span class="fc" id="L186">                        fechaMenorAnio = fecha1[0];</span>
-<span class="fc" id="L187">                        fechaMenorMes = fecha1[1];</span>
-<span class="fc" id="L188">                        fechaMenorDia = fecha1[2];</span>
+<span class="fc" id="L238">                        fechaMayorAnio = fecha2[0];</span>
+<span class="fc" id="L239">                        fechaMayorMes = fecha2[1];</span>
+<span class="fc" id="L240">                        fechaMayorDia = fecha2[2];</span>
+<span class="fc" id="L241">                        fechaMenorAnio = fecha1[0];</span>
+<span class="fc" id="L242">                        fechaMenorMes = fecha1[1];</span>
+<span class="fc" id="L243">                        fechaMenorDia = fecha1[2];</span>
 
                     }
 
@@ -193,39 +248,39 @@
 
             }
 
-<span class="fc" id="L196">            fechaMayor = Integer.toString(fechaMayorAnio) + Integer.toString(fechaMayorMes) + Integer.toString(fechaMayorDia);</span>
-<span class="fc" id="L197">            fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);</span>
-<span class="fc" id="L198">            esAnioBisiesto = esBisiesto(fechaMenorAnio);</span>
+<span class="fc" id="L251">            fechaMayor = Integer.toString(fechaMayorAnio) + Integer.toString(fechaMayorMes) + Integer.toString(fechaMayorDia);</span>
+<span class="fc" id="L252">            fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);</span>
+<span class="fc" id="L253">            esAnioBisiesto = esBisiesto(fechaMenorAnio);</span>
 
-<span class="fc bfc" id="L200" title="All 2 branches covered.">            while (!fechaMenor.equals(fechaMayor)) {</span>
+<span class="fc bfc" id="L255" title="All 2 branches covered.">            while (!fechaMenor.equals(fechaMayor)) {</span>
 
-<span class="fc" id="L202">                fechaMenorDia ++;</span>
+<span class="fc" id="L257">                fechaMenorDia ++;</span>
 
-<span class="fc bfc" id="L204" title="All 4 branches covered.">                if (esAnioBisiesto &amp;&amp; fechaMenorMes == 2) {</span>
-<span class="fc" id="L205">                    diasMes = diasPorMes[fechaMenorMes - 1] + 1;</span>
+<span class="fc bfc" id="L259" title="All 4 branches covered.">                if (esAnioBisiesto &amp;&amp; fechaMenorMes == 2) {</span>
+<span class="fc" id="L260">                    diasMes = DIAS_POR_MES[fechaMenorMes - 1] + 1;</span>
                 } else {
-<span class="fc" id="L207">                    diasMes = diasPorMes[fechaMenorMes - 1];</span>
+<span class="fc" id="L262">                    diasMes = DIAS_POR_MES[fechaMenorMes - 1];</span>
                 }
 
-<span class="fc bfc" id="L210" title="All 2 branches covered.">                if (fechaMenorDia &gt; diasMes) {</span>
-<span class="fc" id="L211">                    fechaMenorDia = 1;</span>
-<span class="fc" id="L212">                    fechaMenorMes ++;</span>
+<span class="fc bfc" id="L265" title="All 2 branches covered.">                if (fechaMenorDia &gt; diasMes) {</span>
+<span class="fc" id="L266">                    fechaMenorDia = 1;</span>
+<span class="fc" id="L267">                    fechaMenorMes ++;</span>
                 }
 
-<span class="fc bfc" id="L215" title="All 2 branches covered.">                if (fechaMenorMes &gt; diasPorMes.length) {</span>
-<span class="fc" id="L216">                    fechaMenorMes = 1;</span>
-<span class="fc" id="L217">                    fechaMenorAnio ++;</span>
-<span class="fc" id="L218">                    esAnioBisiesto = esBisiesto(fechaMenorAnio);</span>
+<span class="fc bfc" id="L270" title="All 2 branches covered.">                if (fechaMenorMes &gt; DIAS_POR_MES.length) {</span>
+<span class="fc" id="L271">                    fechaMenorMes = 1;</span>
+<span class="fc" id="L272">                    fechaMenorAnio ++;</span>
+<span class="fc" id="L273">                    esAnioBisiesto = esBisiesto(fechaMenorAnio);</span>
                 }
 
-<span class="fc" id="L221">                diasEntreFechas ++;</span>
-<span class="fc" id="L222">                fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);</span>
+<span class="fc" id="L276">                diasEntreFechas ++;</span>
+<span class="fc" id="L277">                fechaMenor = Integer.toString(fechaMenorAnio) + Integer.toString(fechaMenorMes) + Integer.toString(fechaMenorDia);</span>
 
             }
 
         }
 
-<span class="fc" id="L228">        return diasEntreFechas;</span>
+<span class="fc" id="L283">        return diasEntreFechas;</span>
     }
 
 }

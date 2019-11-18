@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest" time="0.121" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest" time="0.105" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.5+10-LTS"/>
@@ -62,9 +62,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiasEntreFechas" time="0.095"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSemana" time="0.008"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsFechaValida" time="0.009"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsBisiesto" time="0"/>
-  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSiguiente" time="0.009"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testFechaPasada" time="0.021"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testFechaFutura" time="0.001"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsBisiesto" time="0.007"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testEsFechaValida" time="0"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSiguiente" time="0"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiaSemana" time="0.016"/>
+  <testcase classname="com.cenfotec.calidad.avance1proyecto.CalendarioTest" name="com.cenfotec.calidad.avance1proyecto.CalendarioTest.testDiasEntreFechas" time="0.06"/>
 </testsuite>

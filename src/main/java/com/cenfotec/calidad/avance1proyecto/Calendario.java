@@ -257,9 +257,9 @@ public class Calendario {
                 fechaMenorDia ++;
 
                 if (esAnioBisiesto && fechaMenorMes == 2) {
-                    diasMes = diasPorMes[fechaMenorMes - 1] + 1;
+                    diasMes = DIAS_POR_MES[fechaMenorMes - 1] + 1;
                 } else {
-                    diasMes = diasPorMes[fechaMenorMes - 1];
+                    diasMes = DIAS_POR_MES[fechaMenorMes - 1];
                 }
 
                 if (fechaMenorDia > diasMes) {
@@ -267,7 +267,7 @@ public class Calendario {
                     fechaMenorMes ++;
                 }
 
-                if (fechaMenorMes > diasPorMes.length) {
+                if (fechaMenorMes > DIAS_POR_MES.length) {
                     fechaMenorMes = 1;
                     fechaMenorAnio ++;
                     esAnioBisiesto = esBisiesto(fechaMenorAnio);
