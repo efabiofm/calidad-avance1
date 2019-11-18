@@ -12,6 +12,8 @@ public class Main {
         System.out.println("2. Es fecha válida");
         System.out.println("3. Dia siguiente");
         System.out.println("4. Dia semana");
+        System.out.println("5. Fecha futura");
+        System.out.println("6. Fecha pasada");
         System.out.println("Seleccione una opción: ");
         
         int opcion = in.nextInt();
@@ -39,8 +41,8 @@ public class Main {
                 mesInput = in.nextInt();
                 System.out.println("Ingrese el día: ");
                 diaInput = in.nextInt();
-                int[] resultado = calendario.diaSiguiente(anioInput, mesInput, diaInput);
-                System.out.println(imprimirTripletaFecha(resultado));
+                int[] resulDiaSig = calendario.diaSiguiente(anioInput, mesInput, diaInput);
+                System.out.println(imprimirTripletaFecha(resulDiaSig));
                 break;
             case 4:
                 System.out.println("Ingrese el año: ");
@@ -50,6 +52,30 @@ public class Main {
                 System.out.println("Ingrese el día: ");
                 diaInput = in.nextInt();
                 System.out.println(calendario.diaSemana(anioInput, mesInput, diaInput));
+                break;
+            case 5:
+                System.out.println("Ingrese el año: ");
+                anioInput = in.nextInt();
+                System.out.println("Ingrese el mes: ");
+                mesInput = in.nextInt();
+                System.out.println("Ingrese el día: ");
+                diaInput = in.nextInt();
+                System.out.println("Ingrese los días a futuro: ");
+                int diasFuturo = in.nextInt();
+                int[] resulFechaFuturo = calendario.fechaFutura(new int[]{anioInput, mesInput, diaInput}, diasFuturo);
+                System.out.println(imprimirTripletaFecha(resulFechaFuturo));
+                break;
+            case 6:
+                System.out.println("Ingrese el año: ");
+                anioInput = in.nextInt();
+                System.out.println("Ingrese el mes: ");
+                mesInput = in.nextInt();
+                System.out.println("Ingrese el día: ");
+                diaInput = in.nextInt();
+                System.out.println("Ingrese los días al pasado: ");
+                int diasPasado = in.nextInt();
+                int[] resulFechaPasado = calendario.fechaPasada(new int[]{anioInput, mesInput, diaInput}, diasPasado);
+                System.out.println(imprimirTripletaFecha(resulFechaPasado));
                 break;
             default:
                 System.out.println("Opción inválida");
