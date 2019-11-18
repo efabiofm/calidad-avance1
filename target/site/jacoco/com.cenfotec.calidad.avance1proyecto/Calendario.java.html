@@ -3,7 +3,7 @@
 <span class="fc" id="L3">public class Calendario {</span>
 
 <span class="fc" id="L5">    private final int ANIO_MINIMO = 1582;</span>
-<span class="fc" id="L6">    private int[] diasPorMes = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</span>
+<span class="fc" id="L6">    private final int[] DIAS_POR_MES = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</span>
 
     public boolean esBisiesto(int anio) {
         //Un año bisiesto en el calendario gregoriano debe:
@@ -17,7 +17,7 @@
         // días y años bisiestos correctos
 <span class="fc bfc" id="L18" title="All 2 branches covered.">        if (anio &gt;= ANIO_MINIMO) {</span>
 <span class="fc bfc" id="L19" title="All 4 branches covered.">            if (mes &gt; 0 &amp;&amp; mes &lt;= 12) {</span>
-<span class="fc bfc" id="L20" title="All 4 branches covered.">                int numeroDeDias = mes == 2 &amp;&amp; esBisiesto(anio) ? diasPorMes[mes - 1] + 1 : diasPorMes[mes - 1];</span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">                int numeroDeDias = mes == 2 &amp;&amp; esBisiesto(anio) ? DIAS_POR_MES[mes - 1] + 1 : DIAS_POR_MES[mes - 1];</span>
 <span class="fc bfc" id="L21" title="All 4 branches covered.">                if (dia &gt; 0 &amp;&amp; dia &lt;= numeroDeDias) {</span>
 <span class="fc" id="L22">                    return true;</span>
                 }
@@ -28,7 +28,7 @@
 
     public int[] diaSiguiente(int anio, int mes, int dia) {
 <span class="fc" id="L30">        boolean esBisiesto = esBisiesto(anio);</span>
-<span class="fc" id="L31">        int diasDelMes = diasPorMes[mes - 1];</span>
+<span class="fc" id="L31">        int diasDelMes = DIAS_POR_MES[mes - 1];</span>
 <span class="fc" id="L32">        int sigDia = dia, sigMes = mes, sigAnio = anio;</span>
 
 <span class="fc bfc" id="L34" title="All 4 branches covered.">        if (mes == 2 &amp;&amp; esBisiesto) {</span>
@@ -108,6 +108,61 @@
 
 <span class="fc" id="L109">        return diaSemana;</span>
 
+    }
+    
+    public int[] fechaFutura(int[] fechaInicio, int diasFuturo) {
+<span class="fc" id="L114">        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        boolean esDiasFuturoValido = diasFuturo &gt; 0;</span>
+<span class="fc bfc" id="L116" title="All 4 branches covered.">        if (esFechaValida &amp;&amp; esDiasFuturoValido) {</span>
+<span class="fc" id="L117">            int anioActual = fechaInicio[0];</span>
+<span class="fc" id="L118">            int mesActual = fechaInicio[1];</span>
+<span class="fc" id="L119">            int diaActual = fechaInicio[2];</span>
+<span class="fc" id="L120">            int contador = diasFuturo;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            while(contador &gt; 0) {</span>
+<span class="fc" id="L122">                diaActual += 1;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                if (diaActual &gt; DIAS_POR_MES[mesActual - 1]) {</span>
+<span class="fc bfc" id="L124" title="All 4 branches covered.">                    if (mesActual != 2 || !esBisiesto(anioActual)) {</span>
+<span class="fc" id="L125">                        diaActual = 1;</span>
+<span class="fc" id="L126">                        mesActual += 1;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">                        if (mesActual &gt; DIAS_POR_MES.length) {</span>
+<span class="fc" id="L128">                            mesActual = 1;</span>
+<span class="fc" id="L129">                            anioActual += 1;</span>
+                        }
+                    }
+                }
+<span class="fc" id="L133">                contador--;</span>
+            }
+<span class="fc" id="L135">            return new int[] { anioActual, mesActual, diaActual };</span>
+        }
+<span class="fc" id="L137">        throw new IllegalArgumentException();</span>
+    }
+    
+    public int[] fechaPasada(int[] fechaInicio, int diasPasado) {
+<span class="fc" id="L141">        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        boolean esDiasFuturoValido = diasPasado &gt; 0;</span>
+<span class="fc bfc" id="L143" title="All 4 branches covered.">        if (esFechaValida &amp;&amp; esDiasFuturoValido) {</span>
+<span class="fc" id="L144">            int anioActual = fechaInicio[0];</span>
+<span class="fc" id="L145">            int mesActual = fechaInicio[1];</span>
+<span class="fc" id="L146">            int diaActual = fechaInicio[2];</span>
+<span class="fc" id="L147">            int contador = diasPasado;</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            while(contador &gt; 0) {</span>
+<span class="fc" id="L149">                diaActual -= 1;</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                if (diaActual == 0) {</span>
+<span class="fc" id="L151">                    mesActual -= 1;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                    if (mesActual == 0) {</span>
+<span class="fc" id="L153">                        mesActual = DIAS_POR_MES.length;</span>
+<span class="fc" id="L154">                        anioActual -= 1;</span>
+                    }
+<span class="fc" id="L156">                    diaActual = DIAS_POR_MES[mesActual - 1];</span>
+<span class="fc bfc" id="L157" title="All 4 branches covered.">                    if (mesActual == 2 &amp;&amp; esBisiesto(anioActual)) {</span>
+<span class="fc" id="L158">                        diaActual += 1;</span>
+                    }
+                }
+<span class="fc" id="L161">                contador--;</span>
+            }
+<span class="fc" id="L163">            return new int[] { anioActual, mesActual, diaActual };</span>
+        }
+<span class="fc" id="L165">        throw new IllegalArgumentException();</span>
     }
 
 }

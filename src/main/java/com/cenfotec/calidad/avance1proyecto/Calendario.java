@@ -3,7 +3,7 @@ package com.cenfotec.calidad.avance1proyecto;
 public class Calendario {
 
     private final int ANIO_MINIMO = 1582;
-    private int[] diasPorMes = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int[] DIAS_POR_MES = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public boolean esBisiesto(int anio) {
         //Un año bisiesto en el calendario gregoriano debe:
@@ -17,7 +17,7 @@ public class Calendario {
         // días y años bisiestos correctos
         if (anio >= ANIO_MINIMO) {
             if (mes > 0 && mes <= 12) {
-                int numeroDeDias = mes == 2 && esBisiesto(anio) ? diasPorMes[mes - 1] + 1 : diasPorMes[mes - 1];
+                int numeroDeDias = mes == 2 && esBisiesto(anio) ? DIAS_POR_MES[mes - 1] + 1 : DIAS_POR_MES[mes - 1];
                 if (dia > 0 && dia <= numeroDeDias) {
                     return true;
                 }
@@ -28,7 +28,7 @@ public class Calendario {
 
     public int[] diaSiguiente(int anio, int mes, int dia) {
         boolean esBisiesto = esBisiesto(anio);
-        int diasDelMes = diasPorMes[mes - 1];
+        int diasDelMes = DIAS_POR_MES[mes - 1];
         int sigDia = dia, sigMes = mes, sigAnio = anio;
 
         if (mes == 2 && esBisiesto) {
@@ -108,6 +108,61 @@ public class Calendario {
 
         return diaSemana;
 
+    }
+    
+    public int[] fechaFutura(int[] fechaInicio, int diasFuturo) {
+        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
+        boolean esDiasFuturoValido = diasFuturo > 0;
+        if (esFechaValida && esDiasFuturoValido) {
+            int anioActual = fechaInicio[0];
+            int mesActual = fechaInicio[1];
+            int diaActual = fechaInicio[2];
+            int contador = diasFuturo;
+            while(contador > 0) {
+                diaActual += 1;
+                if (diaActual > DIAS_POR_MES[mesActual - 1]) {
+                    if (mesActual != 2 || !esBisiesto(anioActual)) {
+                        diaActual = 1;
+                        mesActual += 1;
+                        if (mesActual > DIAS_POR_MES.length) {
+                            mesActual = 1;
+                            anioActual += 1;
+                        }
+                    }
+                }
+                contador--;
+            }
+            return new int[] { anioActual, mesActual, diaActual };
+        }
+        throw new IllegalArgumentException();
+    }
+    
+    public int[] fechaPasada(int[] fechaInicio, int diasPasado) {
+        boolean esFechaValida = esFechaValida(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
+        boolean esDiasFuturoValido = diasPasado > 0;
+        if (esFechaValida && esDiasFuturoValido) {
+            int anioActual = fechaInicio[0];
+            int mesActual = fechaInicio[1];
+            int diaActual = fechaInicio[2];
+            int contador = diasPasado;
+            while(contador > 0) {
+                diaActual -= 1;
+                if (diaActual == 0) {
+                    mesActual -= 1;
+                    if (mesActual == 0) {
+                        mesActual = DIAS_POR_MES.length;
+                        anioActual -= 1;
+                    }
+                    diaActual = DIAS_POR_MES[mesActual - 1];
+                    if (mesActual == 2 && esBisiesto(anioActual)) {
+                        diaActual += 1;
+                    }
+                }
+                contador--;
+            }
+            return new int[] { anioActual, mesActual, diaActual };
+        }
+        throw new IllegalArgumentException();
     }
 
 }
