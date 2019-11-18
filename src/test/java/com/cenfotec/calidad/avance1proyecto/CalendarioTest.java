@@ -19,7 +19,7 @@ public class CalendarioTest {
         assertEquals(true, cal.esBisiesto(2000));
         assertEquals(true, cal.esBisiesto(2400));
     }
-    
+
     public void testEsFechaValida() {
         Calendario cal = new Calendario();
         assertEquals(false, cal.esFechaValida(1581, 1, 1));
@@ -34,7 +34,7 @@ public class CalendarioTest {
         assertEquals(false, cal.esFechaValida(2020, 1, 32));
         assertEquals(true, cal.esFechaValida(2020, 1, 31));
     }
-    
+
     public void testDiaSiguiente() {
         Calendario cal = new Calendario();
         assertArrayEquals(new int[]{2020, 1, 1}, cal.diaSiguiente(2019, 12, 31));
@@ -46,7 +46,7 @@ public class CalendarioTest {
         // Tests adicionales para cubrir los branches no visitados
         assertArrayEquals(new int[]{2020, 1, 3}, cal.diaSiguiente(2020, 1, 2));
     }
-    
+
     public void testDiaSemana() {
         Calendario cal = new Calendario();
         assertEquals(0, cal.diaSemana(2020, 2, 23));
@@ -76,7 +76,7 @@ public class CalendarioTest {
         assertArrayEquals(new int[]{2019, 12, 31}, cal.fechaFutura(new int[]{2019, 12, 30}, 1));
         assertArrayEquals(new int[]{2020, 1, 1}, cal.fechaFutura(new int[]{2019, 12, 31}, 1));
     }
-    
+
     public void testFechaPasada() {
         Calendario cal = new Calendario();
         assertThrows(IllegalArgumentException.class, () -> cal.fechaPasada(new int[]{2019,2,28}, 0));
@@ -86,4 +86,26 @@ public class CalendarioTest {
         assertArrayEquals(new int[]{2019, 12, 30}, cal.fechaPasada(new int[]{2019, 12, 31}, 1));
         assertArrayEquals(new int[]{2019, 12, 31}, cal.fechaPasada(new int[]{2020, 1, 1}, 1));
     }
+
+    public void testDiasEntreFechas() {
+        Calendario cal = new Calendario();
+        int[] fecha1 = {2019, 2, 28};
+        int[] fecha2 = {2019, 2, 2};
+        int[] fecha3 = {2019, 3, 1};
+        int[] fecha4 = {2020, 3, 1};
+        int[] fecha5 = {2020, 2, 28};
+        int[] fecha6 = {2095, 3, 1};
+        int[] fecha7 = {2020, 1, 2};
+        int[] fecha8 = {2021, 2, 3};
+        assertEquals(0, cal.diasEntreFechas(fecha1, fecha1));
+        assertEquals(1, cal.diasEntreFechas(fecha1, fecha3));
+        assertEquals(2, cal.diasEntreFechas(fecha5, fecha4));
+        assertEquals(2, cal.diasEntreFechas(fecha4, fecha5));
+        assertEquals(27395, cal.diasEntreFechas(fecha5, fecha6));
+        assertEquals(27395, cal.diasEntreFechas(fecha6, fecha5));
+        assertEquals(398, cal.diasEntreFechas(fecha7, fecha8));
+        assertEquals(398, cal.diasEntreFechas(fecha8, fecha7));
+        assertEquals(26, cal.diasEntreFechas(fecha1, fecha2));
+        assertEquals(26, cal.diasEntreFechas(fecha2, fecha1));
+   }
 }
